@@ -1037,6 +1037,108 @@
     .dialog.intro .dialog-btns {
       margin-top: 6px;
     }
+    /* Cyanide migration notice — deliberately cool/teal so it doesn't read
+       as another red/orange "you broke something" warning. */
+    .migration-primary,
+    .migration-secondary,
+    .migration-fineprint {
+      border-radius: 10px;
+      padding: 11px 13px;
+      margin-bottom: 10px;
+      font-size: 0.74rem;
+      line-height: 1.6;
+      box-shadow: var(--shadow-sm);
+    }
+    .migration-primary {
+      background: linear-gradient(135deg, #e6fbff 0%, #d2f3fb 100%);
+      border: 1px solid #1bb4c9;
+      color: #0a5f6e;
+      box-shadow: 0 1px 2px rgba(11,107,120,0.10), 0 6px 18px -8px rgba(11,107,120,0.30);
+    }
+    .migration-primary strong { color: #053742; font-weight: 700; }
+    .migration-primary a { color: #0a5f6e; text-decoration: underline; font-weight: 600; }
+    .migration-secondary {
+      background: #eef1fb;
+      border: 1px solid #7d8cf0;
+      color: #2a3680;
+    }
+    .migration-secondary strong { color: #1a2362; font-weight: 700; }
+    .migration-secondary a { color: #2a3680; text-decoration: underline; }
+    .migration-fineprint {
+      background: #f4f5f7;
+      border: 1px solid #d4d7de;
+      color: #50545d;
+      font-size: 0.7rem;
+    }
+    .migration-fineprint strong { color: #2a2d34; font-weight: 600; }
+    .btn-cyanide {
+      background: linear-gradient(135deg, #0ea5b8 0%, #0c8fa1 100%);
+      color: #fff;
+      border-color: #0a7f8f;
+      box-shadow: 0 1px 2px rgba(10,127,143,0.18), 0 6px 14px -6px rgba(10,127,143,0.45);
+    }
+    .btn-cyanide:hover {
+      background: linear-gradient(135deg, #0c8fa1 0%, #0a7f8f 100%);
+      border-color: #086d7c;
+    }
+    /* Persistent top banner directing users to Cyanide. Sits above .page
+       so it scrolls with the document and is visible on every visit. */
+    .cyanide-banner {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      width: 100%;
+      padding: 10px 16px;
+      background: linear-gradient(90deg, #0c8fa1 0%, #0ea5b8 50%, #1bb4c9 100%);
+      color: #fff;
+      text-decoration: none;
+      font-size: 0.78rem;
+      line-height: 1.35;
+      box-shadow: 0 2px 12px -4px rgba(10,127,143,0.45);
+      -webkit-tap-highlight-color: transparent;
+    }
+    .cyanide-banner:hover,
+    .cyanide-banner:focus { filter: brightness(1.05); }
+    .cyanide-banner strong { font-weight: 700; color: #fff; }
+    .cyanide-banner-copy {
+      flex: 1;
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .cyanide-banner-sub {
+      font-size: 0.72rem;
+      opacity: 0.92;
+      font-weight: 500;
+    }
+    .cyanide-banner-cta {
+      flex: 0 0 auto;
+      font-weight: 600;
+      padding: 6px 10px;
+      border-radius: 8px;
+      background: rgba(255,255,255,0.18);
+      border: 1px solid rgba(255,255,255,0.35);
+      white-space: nowrap;
+    }
+    .cyanide-banner-pulse {
+      flex: 0 0 auto;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #ffffff;
+      box-shadow: 0 0 0 0 rgba(255,255,255,0.7);
+      animation: cyanidePulse 2s var(--ease) infinite;
+    }
+    @keyframes cyanidePulse {
+      0%   { box-shadow: 0 0 0 0 rgba(255,255,255,0.7); }
+      70%  { box-shadow: 0 0 0 10px rgba(255,255,255,0); }
+      100% { box-shadow: 0 0 0 0 rgba(255,255,255,0); }
+    }
+    @media (max-width: 420px) {
+      .cyanide-banner { padding: 9px 12px; gap: 10px; }
+      .cyanide-banner-cta { padding: 5px 8px; font-size: 0.72rem; }
+    }
     .level-list {
       display: flex;
       flex-direction: column;
@@ -1596,6 +1698,14 @@
   </style>
 </head>
 <body>
+  <a id="cyanideBanner" class="cyanide-banner" href="https://github.com/zeroxjf/cyanide-ios" target="_blank" rel="noopener" aria-label="LightSaber is moving to Cyanide">
+    <span class="cyanide-banner-pulse" aria-hidden="true"></span>
+    <span class="cyanide-banner-copy">
+      <strong>LightSaber is moving to Cyanide.</strong>
+      <span class="cyanide-banner-sub">Built on the kernel exploit &mdash; far more reliable than this userland chain.</span>
+    </span>
+    <span class="cyanide-banner-cta">Open repo &rsaquo;</span>
+  </a>
   <div class="page">
     <div class="page-header">
       <div class="page-title">LightSaber</div>
@@ -1947,7 +2057,7 @@
       <a href="https://twitter.com/cro4js" target="_blank" rel="noopener">@cro4js</a> &mdash; UI suggestions
     </div>
 
-    <p class="version">v0.0.131</p>
+    <p class="version">v0.0.132</p>
   </div>
 
   <div class="tweak-sheet-backdrop" id="tweakSheetBackdrop"></div>
@@ -1963,17 +2073,17 @@
     <div class="dialog intro">
       <h2>LightSaber is moving to Cyanide</h2>
       <p class="intro-sub">Please read this before continuing.</p>
-      <div class="warning">
+      <div class="migration-primary">
         <strong>LightSaber will be discontinued soon.</strong> Active development has moved to <a href="https://github.com/zeroxjf/cyanide-ios" target="_blank" rel="noopener">Cyanide</a>, which is built on a full kernel exploit instead of this WebKit + sandbox-escape chain. Cyanide is dramatically more reliable: no Safari freezes, no multi-try chain runs, no kernel panics from a flaky userland exploit, and tweaks persist properly instead of being JS injected at runtime.
       </div>
-      <div class="caution">
+      <div class="migration-secondary">
         <strong>Why switch.</strong> LightSaber is a userland chain stitched together from DarkSword &mdash; it works, but SpringBoard crashes, page freezes, and "webpage crashed" retries are inherent to it. Cyanide runs from a signed app via the kernel exploit, so the same tweaks (SBCustomizer, Powercuff, StatBar, App Library, etc.) install in one shot and survive cleanly. Same author, same tweaks, far better foundation.
       </div>
-      <div class="disclaimer">
-        <strong>If you still want to use LightSaber:</strong> this is not tweak injection &mdash; it's JavaScript injection during an exploit chain that modifies processes at runtime. Changes persist until respring or reboot. The chain may take several tries to succeed, SpringBoard may crash, the kernel may panic. Use at your own risk &mdash; I am not liable for any damage or data loss.
+      <div class="migration-fineprint">
+        <strong>If you still want to use LightSaber:</strong> this is JavaScript injection during an exploit chain that modifies processes at runtime; changes persist until respring or reboot. The chain may take several tries to succeed, SpringBoard may crash, the kernel may panic. Use at your own risk &mdash; I am not liable for any damage or data loss.
       </div>
       <div class="dialog-btns">
-        <button class="btn-confirm" onclick="window.open('https://github.com/zeroxjf/cyanide-ios','_blank','noopener')">Get Cyanide</button>
+        <button class="btn-cyanide" onclick="window.open('https://github.com/zeroxjf/cyanide-ios','_blank','noopener')">Get Cyanide</button>
         <button class="btn-cancel" onclick="dismissIntro()">Continue with LightSaber</button>
       </div>
     </div>
