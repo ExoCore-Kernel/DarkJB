@@ -1,11 +1,10 @@
 (() => {
   // powercuff_light.js
   //
-  // Port of rpetrich's Powercuff thermal-throttle tweak
-  // (https://github.com/rpetrich/Powercuff) to the lightsaber JS-injection
+  // Powercuff-style thermal-throttle tweak for the DarkJB JS-injection
   // chain's daemon-injection primitive instead of a Cydia-style dylib. All
   // credit for the original tweak design and the discovery of the
-  // putDeviceInThermalSimulationMode: API goes to rpetrich.
+  // putDeviceInThermalSimulationMode: uses system thermal simulation API.
   //
   // Runs *inside thermalmonitord*, walks +[CPMSHelper sharedInstance] to the
   // live CommonProduct singleton, and calls putDeviceInThermalSimulationMode:

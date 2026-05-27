@@ -126,7 +126,7 @@ function redirect()
     if (__ls_terminal_sent) return;
     __ls_terminal_sent = true;
     try { sessionStorage.removeItem('ls_running'); } catch(e) {}
-    // Use '*' as targetOrigin to match upstream DarkSword. location.origin
+    // Use '*' as targetOrigin for compatibility. location.origin
     // would silently drop the message if the iframe's computed origin
     // doesn't exactly match the parent's (bfcache restore, scheme/port
     // mismatch, etc.) - we'd rather always deliver the done signal than
