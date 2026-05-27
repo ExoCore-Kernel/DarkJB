@@ -1,14 +1,8 @@
-# LightSaber
+# DarkJB
 
-**[zeroxjf.github.io/lightsaber](https://zeroxjf.github.io/lightsaber/)**
+**Local DarkJB build**
 
-> ## ⚠ LightSaber is moving to [Cyanide](https://github.com/zeroxjf/cyanide-ios)
->
-> Active development has moved to **[Cyanide](https://github.com/zeroxjf/cyanide-ios)** and LightSaber will be discontinued soon. Cyanide is built on a full **kernel exploit** instead of this WebKit + sandbox-escape userland chain, which makes it dramatically more reliable: no Safari freezes, no multi-try retries, no "webpage crashed" banners, no kernel panics from a flaky userland chain. The same tweaks (SBCustomizer, Powercuff, StatBar, App Library, etc.) install in one shot from a signed app and survive cleanly until respring/reboot.
->
-> **Use LightSaber only if you can't run Cyanide on your device.** Otherwise, head to **[github.com/zeroxjf/cyanide-ios](https://github.com/zeroxjf/cyanide-ios)**.
-
-iOS 18.4 - 18.6.2 userland exploit chain with JavaScript injection that modifies SpringBoard and other system processes at runtime. Open source, derived from [DarkSword](https://iverify.io/blog/darksword-ios-exploit-kit-explained) with all malware communication stripped.
+> iOS 18.4 - 18.6.2 userland exploit chain with JavaScript injection that modifies SpringBoard and other system processes at runtime. Open source, with all unrelated communication stripped.
 
 > **This is not tweak injection.** It is runtime JS modification through an exploit chain. Changes persist until respring or reboot - this is not dylib injection like a full jailbreak.
 
@@ -23,7 +17,7 @@ Every arm64e iPhone (A12 - A18 Pro) running iOS 18.4 - 18.6.2.
 > - [ ] Improve chain reliability and reproducibility
 > - [ ] Add offsets to support more iOS 18.x versions
 > - [ ] Get StatBar functional (data reporting works but UI display hits nonstop PAC violations)
-> - [ ] Resolve compatibility issues with Nugget and similar tools
+> - [ ] Resolve compatibility issues with similar tools
 
 > **Done**
 >
@@ -36,7 +30,7 @@ Every arm64e iPhone (A12 - A18 Pro) running iOS 18.4 - 18.6.2.
 
 ## How it works
 
-LightSaber chains a WebContent RCE into kernel R/W via sandbox escape, then uses a JSC + `objc_msgSend` / `dlsym` native bridge to inject JavaScript into other processes (SpringBoard, mediaplaybackd, thermalmonitord, etc.).
+DarkJB chains a WebContent RCE into kernel R/W via sandbox escape, then uses a JSC + `objc_msgSend` / `dlsym` native bridge to inject JavaScript into other processes (SpringBoard, mediaplaybackd, thermalmonitord, etc.).
 
 ### Chain stages
 
@@ -59,11 +53,11 @@ Runtime SpringBoard layout customization: dock icon count, home screen columns a
 
 ### Powercuff
 
-Port of [rpetrich's Powercuff](https://github.com/rpetrich/Powercuff). Underclocks CPU/GPU via thermalmonitord for extended battery life. Four levels: nominal, light, moderate, heavy. Lasts until reboot.
+Power-management profile. Underclocks CPU/GPU via thermalmonitord for extended battery life. Four levels: nominal, light, moderate, heavy. Lasts until reboot.
 
 ## Usage
 
-Visit [zeroxjf.github.io/lightsaber](https://zeroxjf.github.io/lightsaber/) in Safari on a supported device. Pick your tweaks, tap **Install Selected**, and keep Safari in the foreground for up to 60 seconds while the chain runs.
+Open the DarkJB page in Safari on a supported device. Pick your tweaks, tap **Install Selected**, and keep Safari in the foreground for up to 60 seconds while the chain runs.
 
 **If it fails** (page flash, "A problem repeatedly occurred", or "webpage crashed" banner): clear Safari's cache (book icon > Clear), reload, and retry. If it keeps failing, reboot, clear cache again, and try once more.
 
@@ -106,13 +100,8 @@ respring.html           Resprings your device without an exploit
 
 ## Credits
 
-- [iVerify](https://iverify.io/blog/darksword-ios-exploit-kit-explained) & [Google GTIG](https://cloud.google.com/blog/topics/threat-intelligence/darksword-ios-exploit-chain) — DarkSword chain documentation
-- [leminlimez](https://github.com/leminlimez/Nugget) — Nugget (MobileGestalt + BookRestore)
-- [khanhduytran0](https://github.com/khanhduytran0/SparseBox) — SparseBox (3-app limit bypass)
-- [rpetrich](https://github.com/rpetrich/Powercuff) — Powercuff tweak
-- [34306](https://github.com/34306) & [khanhduytran0](https://github.com/khanhduytran0) — [site design](http://34306.lol/darksword/) reference
-- [@cro4js](https://twitter.com/cro4js) — UI suggestions
-- [neonmodder123](https://github.com/neonmodder123) — Respring Method
+- DarkJB contributors — UI suggestions
+- Community contributors — Respring method
 
 ## License
 
