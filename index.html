@@ -2570,7 +2570,11 @@
       canRun = true;
     } else {
       supportColor = '#b91c1c';
-      supportText = 'iOS ' + iosVer + ' \u2014 not yet supported';
+      var reportedVer = iosVer || (major ? String(major) : 'unknown');
+      var uaFreezeHint = (major >= 19)
+        ? ' (reported by Safari UA; newer iOS builds may still identify as iOS ' + major + ')'
+        : '';
+      supportText = 'iOS ' + reportedVer + ' \u2014 not yet supported' + uaFreezeHint;
     }
     supportMsg.style.color = supportColor;
     supportMsg.style.fontWeight = '600';
