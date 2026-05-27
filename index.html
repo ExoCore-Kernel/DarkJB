@@ -1736,6 +1736,7 @@
 
     <div class="section">
       <p id="supportMsg" style="font-size:0.78rem;margin-bottom:4px"></p>
+      <button type="button" id="supportOverrideBtn" class="btn btn-secondary" style="display:none;margin:0 0 8px 0;padding:8px 12px;font-size:0.72rem">Support Override</button>
       <p style="font-size:0.7rem;color:var(--faint);margin-bottom:10px">iPhone &middot; iOS 18.4&ndash;18.6.2</p>
 
       <div class="tweak-list">
@@ -2581,10 +2582,28 @@
     supportMsg.textContent = supportText;
 
     var runBtn = document.getElementById('runBtn');
-    if (!canRun) {
+    var supportOverrideBtn = document.getElementById('supportOverrideBtn');
+    function setRunBlockedState() {
       runBtn.className = 'btn btn-disabled';
       runBtn.textContent = 'Not available';
       runBtn.onclick = null;
+      if (supportOverrideBtn) supportOverrideBtn.style.display = 'inline-flex';
+    }
+    if (!canRun) {
+      setRunBlockedState();
+    }
+    if (supportOverrideBtn) {
+      supportOverrideBtn.addEventListener('click', function() {
+        var confirmed = window.confirm('Support Override bypasses the support barrier. This may be unstable and results are unknown. Continue anyway?');
+        if (!confirmed) return;
+        canRun = true;
+        runBtn.className = 'btn';
+        runBtn.textContent = 'Install + Respring';
+        runBtn.onclick = confirmInstall;
+        supportMsg.style.color = '#b45309';
+        supportMsg.textContent = supportText + ' (support override enabled; instability and unknown results possible)';
+        supportOverrideBtn.style.display = 'none';
+      });
     }
 
     // Wire tweak rows. Each row has two independent interactive areas in its
