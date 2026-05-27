@@ -1814,6 +1814,7 @@
   LOG("[+] PE Post-Exploitation !!!");
   LOG(`[+] kernel_base: ${mpd_kernel_base().hex()}`);
   LOG(`[+] kernel_slide: ${mpd_kernel_slide().hex()}`);
+  LOG("[PE] Kernel-only mode enabled: skipping all patches/tweaks");
   let main = {};
   main.chainData = {
 	  "chosenOffsets": null
@@ -8823,7 +8824,7 @@ const ENABLE_CORUNA_TWEAKLOADER = false;
 // in a single chain run. index.html can select any subset; each flag drives an
 // independent payload injection. Defaults to fiveicon if no tweak flags are
 // specified (e.g. when pe_main.js is run standalone without the sbx1 prelude).
-const ENABLE_SPRINGBOARD_JS_TWEAK = (typeof globalThis.__ls_enable_fiveicon === 'undefined' && typeof globalThis.__ls_enable_powercuff === 'undefined' && typeof globalThis.__ls_enable_mgpatcher === 'undefined' && typeof globalThis.__ls_enable_applimit === 'undefined' && typeof globalThis.__ls_enable_statbar === 'undefined' && typeof globalThis.__ls_enable_speedster === 'undefined') ? true : (!!globalThis.__ls_enable_fiveicon || !!globalThis.__ls_enable_statbar || !!globalThis.__ls_enable_speedster);
+const ENABLE_SPRINGBOARD_JS_TWEAK = false;
 const SPRINGBOARD_JS_TWEAK_PATH = "/sbcustomizer_light.js";
 const SPRINGBOARD_JS_TWEAK_LABEL = "SBCustomizer JS";
 const ENABLE_CHAIN_STATUS_OVERLAY = globalThis.__ls_enable_chain_overlay === true;
@@ -8831,15 +8832,15 @@ const CHAIN_STATUS_OVERLAY_PATH = "/chain_status_overlay.js";
 const CHAIN_STATUS_OVERLAY_LABEL = "Chain Status Overlay";
 const CHAIN_STATUS_LOG_PATH = "/private/var/tmp/lightsaber_chain_status.log";
 const CHAIN_STATUS_MAX_BUFFER_LINES = 192;
-const ENABLE_POWERCUFF_TWEAK = !!globalThis.__ls_enable_powercuff;
+const ENABLE_POWERCUFF_TWEAK = false;
 const POWERCUFF_TWEAK_PATH = "/powercuff_light.js";
 const POWERCUFF_TWEAK_LABEL = "Powercuff";
-const ENABLE_MGPATCHER = !!globalThis.__ls_enable_mgpatcher;
+const ENABLE_MGPATCHER = false;
 const MG_FLAGS = (typeof globalThis.__mg_flags === 'string') ? globalThis.__mg_flags : '';
 const MG_UNFLAGS = (typeof globalThis.__mg_unflags === 'string') ? globalThis.__mg_unflags : '';
-const ENABLE_APPLIMIT_REQUESTED = !!globalThis.__ls_enable_applimit;
+const ENABLE_APPLIMIT_REQUESTED = false;
 const ENABLE_APPLIMIT = false;
-const ENABLE_SPRINGBOARD_AGENT = ENABLE_CORUNA_TWEAKLOADER || ENABLE_SPRINGBOARD_JS_TWEAK || ENABLE_CHAIN_STATUS_OVERLAY;
+const ENABLE_SPRINGBOARD_AGENT = false;
 // sbcustomizer_light.js dispatches to the SpringBoard main thread
 // asynchronously. When it runs without Powercuff piggybacking on it, keep the
 // chain alive briefly so the dispatched main-thread work has time to run
