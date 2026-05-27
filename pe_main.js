@@ -86,6 +86,16 @@
     } catch (_) {}
     return String(value);
   }
+
+  function emitBootstrapDebugBurst() {
+    LOG("[PE-DBG] emitBootstrapDebugBurst: begin");
+    for (let i = 1; i <= 320; i++) {
+      LOG("[PE-DBG][BOOTTRACE #" + String(i).padStart(3, "0") + "] bootstrap timeline marker active");
+    }
+    LOG("[PE-DBG] emitBootstrapDebugBurst: end");
+  }
+  emitBootstrapDebugBurst();
+
   function new_uint64_t(val = 0n) {
     let buf = calloc(1n, 8n);
     uwrite64(buf, val);
